@@ -67,20 +67,15 @@ jobs:
     steps:
     - uses: actions/checkout@v3
     - name: Set up nodeJS
-      # Это готовый воркфлоу для установки Node.js на раннер
       uses: actions/setup-node@v3
       with:
-        # Это параметр воркфлоу, указывающий нужную версию Node.js
         node-version: 18
-
     - name: Install dependencies
-      # Эта команда устанавливает зависимости для фронтенда
       run: |
         cd frontend/
         npm ci
 
     - name: Test frontend
-      # Запускаем тесты
       run: |
         cd frontend/
         npm run test
@@ -104,7 +99,7 @@ jobs:
           context: ./frontend/
           push: true
           tags: username/taski_frontend:latest
-    build_gateway_and_push_to_docker_hub:
+  build_gateway_and_push_to_docker_hub:
     name: Push gateway Docker image to DockerHub
     runs-on: ubuntu-latest
     steps:
@@ -122,5 +117,4 @@ jobs:
         with:
           context: ./gateway/
           push: true
-          # Тут вместо username должен быть ваш логин на Docker Hub
           tags: username/taski_gateway:latest
